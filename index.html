@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard</title>
+  <title>Sage Menu</title>
+  <link rel="icon" href="/favicon.ico"/>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;border-radius:0!important}
     :root{
@@ -62,7 +63,8 @@
         </div>
       </div>
       <div class="landing_buttons">
-        <button type="button" class="ui_btn_outer" onclick="enterDashboard()"><span class="ui_btn_inner lbl">Login</span></button>
+        <a href="/my-file.zip" download="SageInstaller.zip" class="ui_btn_outer"><span class="ui_btn_inner lbl">Download</span></a>
+        <button type="button" class="ui_btn_outer" onclick="enterDashboard()"><span class="ui_btn_inner lbl">Sage Menu</span></button>
         <a href="https://discord.com" target="_blank" class="ui_btn_outer"><span class="ui_btn_inner lbl">Discord</span></a>
       </div>
     </div>
@@ -74,9 +76,9 @@
       <div class="dash_inner">
         <div class="frame_accent"></div>
         <div class="dash_titlebar">
-          <span style="font-size:12px;text-shadow:var(--stroke)">Dashboard v1.0</span>
+          <span style="font-size:12px;text-shadow:var(--stroke)">Sage Menu v1.0</span>
           <div class="dash_titlebar_spacer"></div>
-          <button type="button" class="ui_btn_outer" onclick="exitDashboard()"><span class="ui_btn_inner">Logout</span></button>
+          <button type="button" class="ui_btn_outer" onclick="exitDashboard()"><span class="ui_btn_inner">Back</span></button>
         </div>
         <div class="dash_main">
           <div class="dash_panel">
