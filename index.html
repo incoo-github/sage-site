@@ -17,6 +17,7 @@
       --black:#000000;
       --muted:#969696;
       --muted2:#bebebe;
+      --risk:#ff3232;
       --stroke:-1px 0 0 #000,1px 0 0 #000,0 -1px 0 #000,0 1px 0 #000;
       --h:20px;
       --nav-h:26px;
@@ -39,6 +40,13 @@
     .ui_btn_outer:hover{border-color:var(--muted)}
     .ui_btn_inner{display:block;position:relative;height:var(--h);line-height:var(--h);padding:0 12px;background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);text-align:center;font-size:12px}
     .lbl{text-shadow:var(--stroke)}
+
+    .toast{position:fixed;bottom:16px;left:16px;z-index:999;max-width:360px;background:var(--black);border:1px solid var(--black);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;line-height:normal}
+    .toast.show{opacity:1;transform:none}
+    .toast_inner{background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);padding:6px 10px 6px 14px;position:relative;font-size:12px;text-shadow:var(--stroke)}
+    .toast_inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+    .toast.error .toast_inner::before{background:var(--risk)}
+    .toast.success .toast_inner::before{background:#4ade80}
   </style>
 </head>
 <body>
@@ -54,11 +62,29 @@
         </div>
       </div>
       <div class="landing_buttons">
-        <a href="/sage-loader.rar" download="SageLoader.rar" class="ui_btn_outer"><span class="ui_btn_inner lbl">Download</span></a>
+        <button type="button" class="ui_btn_outer" onclick="showToast('Sage is currently in maintenance.', 'error')"><span class="ui_btn_inner lbl">Download</span></button>
         <a href="https://discord.gg/getsage" target="_blank" class="ui_btn_outer"><span class="ui_btn_inner lbl">Discord</span></a>
       </div>
     </div>
   </div>
+
+  <div class="toast" id="toast">
+    <div class="toast_inner" id="toast_msg"></div>
+  </div>
+
+  <script>
+    let toastTimer;
+    function showToast(msg, type = 'success') {
+      const t = document.getElementById('toast');
+      const m = document.getElementById('toast_msg');
+      m.textContent = msg;
+      t.className = 'toast ' + type + ' show';
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        t.className = 'toast';
+      }, 3500);
+    }
+  </script>
 
 </body>
 </html>
