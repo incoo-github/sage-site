@@ -1,23 +1,64 @@
-<!DOCTYPE html><html lang="en"><head>  <meta charset="utf-8"/>  <meta name="viewport" content="width=device-width, initial-scale=1"/>  <title>Sage — Cheap. Undetected. Forever.</title>  <meta name="description" content="Sage External — the best cheap, undetected external. Pay with Robux."/>  <meta property="og:title" content="Sage External"/>  <meta property="og:description" content="Cheap. Undetected. Pay with Robux."/>  <meta property="og:image" content="/sage-logo.png"/>  <link rel="icon" href="/sage-logo.png" type="image/png"/>  <style>    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}    :root{--bg:#050505;--fg:oklch(0.97 0.01 190);--cyan:oklch(0.85 0.12 195);--cyan-dk:oklch(0.2 0.05 195);--cyan-md:oklch(0.7 0.18 190);--black:#000000;--main:#1c1c1c;--outline:#323232;--stroke:-1px 0 0 #000,1px 0 0 #000,0 -1px 0 #000,0 1px 0 #000;--risk:#ff3232}    html,body{background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,sans-serif;height:100vh;overflow:hidden}    a{text-decoration:none;color:inherit}ul,ol{list-style:none}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}    @keyframes glow{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.3;transform:scale(1.1)}}    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}    @keyframes petal-fall{0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translate3d(var(--drift,100px),110vh,0) rotate(720deg);opacity:0}}    @keyframes petal-sway{0%,100%{margin-left:0}50%{margin-left:40px}}
+<!DOCTYPE html><html lang="en"><head>  <meta charset="utf-8"/>  <meta name="viewport" content="width=device-width, initial-scale=1"/>  <title>Sage — Cheap. Undetected. Forever.</title>  <meta name="description" content="Sage External — the best cheap, undetected external. Pay with Robux."/>  <meta property="og:title" content="Sage External"/>  <meta property="og:description" content="Cheap. Undetected. Pay with Robux."/>  <meta property="og:image" content="/sage-logo.png"/>  <link rel="icon" href="/sage-logo.png" type="image/png"/>  <style>    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}    :root{--bg:#050505;--fg:oklch(0.97 0.01 190);--cyan:oklch(0.85 0.12 195);--cyan-dk:oklch(0.2 0.05 195);--black:#000000;--main:#1c1c1c;--outline:#323232;--stroke:-1px 0 0 #000,1px 0 0 #000,0 -1px 0 #000,0 1px 0 #000;--risk:#ff3232}    html,body{background:var(--bg);color:var(--fg);font-family:ui-sans-serif,system-ui,sans-serif;height:100vh;overflow:hidden}    a{text-decoration:none;color:inherit}ul,ol{list-style:none}
+    @keyframes glow{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.3;transform:scale(1.1)}}    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}    @keyframes petal-fall{0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translate3d(var(--drift,100px),110vh,0) rotate(720deg);opacity:0}}    @keyframes petal-sway{0%,100%{margin-left:0}50%{margin-left:40px}}
     .ts{background:linear-gradient(90deg,oklch(.95 .02 190),var(--cyan) 50%,oklch(.95 .02 190));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s linear infinite}
     .pw{pointer-events:none;position:fixed;inset:0;z-index:0;overflow:hidden}    .pt{position:absolute;top:0;background:radial-gradient(circle at 30% 30%,oklch(0.95 0.15 195),oklch(0.85 0.2 190) 60%,oklch(0.7 0.22 185));border-radius:50% 50% 50% 0;filter:drop-shadow(0 2px 6px oklch(0.8 0.2 195/.6));will-change:transform,opacity}
     .gw{pointer-events:none;position:fixed;inset:0;z-index:-1}    .g1{position:absolute;top:-160px;left:-160px;height:500px;width:500px;border-radius:9999px;background:oklch(.75 .15 195);opacity:.1;filter:blur(120px);animation:glow 6s ease-in-out infinite}    .g2{position:absolute;top:33%;right:-160px;height:600px;width:600px;border-radius:9999px;background:oklch(.65 .18 185);opacity:.08;filter:blur(140px);animation:glow 8s ease-in-out infinite 2s}    .g3{position:absolute;bottom:0;left:33%;height:400px;width:400px;border-radius:9999px;background:oklch(.7 .16 190);opacity:.07;filter:blur(120px);animation:glow 7s ease-in-out infinite 1s}
     .pg{position:relative;z-index:10;height:100vh;display:flex;flex-direction:column;justify-content:space-between}    .ct{max-width:1152px;margin:0 auto;padding:0 1.5rem;width:100%}
     nav{display:flex;align-items:center;justify-content:space-between;padding:1.5rem;max-width:1152px;margin:0 auto;width:100%}    .nb{display:flex;align-items:center;gap:.75rem}    .nl{height:40px;width:40px;border-radius:.5rem;object-fit:cover;border:1px solid oklch(1 0 0/10%);transition:transform .5s}    .nb:hover .nl{transform:rotate(6deg) scale(1.1)}    .nn{font-weight:600;letter-spacing:-.025em}
-    .hero{padding:1rem 1.5rem;text-align:center;margin:auto}    h1{margin-top:1.5rem;font-size:clamp(3rem,10vw,5.5rem);font-weight:700;letter-spacing:-.05em;line-height:1}    .hs{margin:1.25rem auto 0;max-width:36rem;font-size:1.125rem;color:oklch(.97 .01 190/70%)}    .hb{margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}    .b1{position:relative;overflow:hidden;border-radius:9999px;background:var(--cyan);padding:.875rem 2rem;color:var(--cyan-dk);font-weight:500;transition:transform .3s,box-shadow .3s;display:inline-block;cursor:pointer;border:none;font-family:inherit;font-size:inherit}    .b1:hover{transform:scale(1.05);box-shadow:0 0 40px oklch(.85 .18 195/.7)}    .b1 .sb{position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,oklch(1 0 0/40%),transparent);transition:transform .7s}    .b1:hover .sb{transform:translateX(100%)}    .b2{border-radius:9999px;border:1px solid oklch(1 0 0/15%);padding:.875rem 2rem;color:oklch(.97 .01 190/90%);transition:background .3s,border-color .3s;display:inline-block}    .b2:hover{background:oklch(1 0 0/5%);border-color:oklch(1 0 0/30%)}
+    .hero{padding:1rem 1.5rem;text-align:center;margin:auto}    h1{margin-top:1.5rem;font-size:clamp(3rem,10vw,5.5rem);font-weight:700;letter-spacing:-.05em;line-height:1}    .hs{margin:1.25rem auto 0;max-width:36rem;font-size:1.125rem;color:oklch(.97 .01 190/70%)}    .hb{margin-top:2rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+    .b1{position:relative;overflow:hidden;border-radius:9999px;background:var(--cyan);padding:.875rem 2rem;color:var(--cyan-dk);font-weight:500;transition:transform .3s,box-shadow .3s;display:inline-block;cursor:pointer;border:none;font-family:inherit;font-size:inherit}
+    .b1:hover{transform:scale(1.05);box-shadow:0 0 40px oklch(.85 .18 195/.7)}
+    .b1 .sb{position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,oklch(1 0 0/40%),transparent);transition:transform .7s}
+    .b1:hover .sb{transform:translateX(100%)}
+    .b2{border-radius:9999px;border:1px solid oklch(1 0 0/15%);padding:.875rem 2rem;color:oklch(.97 .01 190/90%);transition:background .3s,border-color .3s;display:inline-block}
+    .b2:hover{background:oklch(1 0 0/5%);border-color:oklch(1 0 0/30%)}
     footer{border-top:1px solid oklch(1 0 0/5%);padding:1.5rem;text-align:center;font-size:.875rem;color:oklch(.97 .01 190/40%);max-width:1152px;margin:0 auto;width:100%}
-    /* Toast Notification */    .toast{position:fixed;bottom:16px;left:16px;z-index:999;max-width:360px;background:var(--black);border:1px solid var(--black);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;line-height:normal}    .toast.show{opacity:1;transform:none}    .toast_inner{background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);padding:6px 10px 6px 14px;position:relative;font-size:12px;text-shadow:var(--stroke);font-family:Consolas,Tahoma,monospace;color:var(--fg)}    .toast_inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan)}    .toast.error .toast_inner::before{background:var(--risk)}
-    /* Persistent Discord Box Notification */    .discord-banner{position:fixed;bottom:20px;right:20px;z-index:998;background:var(--black);border:1px solid var(--black);width:260px}    .discord-banner-inner{background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);padding:14px;position:relative;font-size:12px;text-shadow:var(--stroke);font-family:Consolas,Tahoma,monospace;color:var(--fg)}    .discord-banner-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan)}    .discord-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}    .discord-title-wrap{display:flex;align-items:center;gap:8px}    .discord-icon{width:16px;height:16px;flex-shrink:0;fill:var(--cyan)}    .discord-close{background:transparent;border:none;color:var(--outline);cursor:pointer;font-family:Consolas,Tahoma,monospace;font-size:13px;padding:0 2px;transition:color .2s}    .discord-close:hover{color:var(--fg)}    .discord-body{line-height:1.4}    .discord-link{display:block;margin-top:6px;color:var(--cyan);text-decoration:underline}    .discord-link:hover{opacity:.8}  </style></head><body>
-<div class="pw" id="petals"></div><div class="gw"><div class="g1"></div><div class="g2"></div><div class="g3"></div></div>
+    .toast{position:fixed;bottom:16px;left:16px;z-index:999;max-width:360px;background:var(--black);border:1px solid var(--black);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;line-height:normal}
+    .toast.show{opacity:1;transform:none}
+    .toast_inner{background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);padding:6px 10px 6px 14px;position:relative;font-size:12px;text-shadow:var(--stroke);font-family:Consolas,Tahoma,monospace;color:var(--fg)}
+    .toast_inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan)}
+    .toast.error .toast_inner::before{background:var(--risk)}
+    .discord-banner{position:fixed;bottom:20px;right:20px;z-index:998;background:var(--black);border:1px solid var(--black);width:260px}
+    .discord-banner-inner{background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);padding:14px;position:relative;font-size:12px;text-shadow:var(--stroke);font-family:Consolas,Tahoma,monospace;color:var(--fg)}
+    .discord-banner-inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cyan)}
+    .discord-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+    .discord-title-wrap{display:flex;align-items:center;gap:8px}
+    .discord-icon{width:16px;height:16px;flex-shrink:0;fill:var(--cyan)}
+    .discord-close{background:transparent;border:none;color:var(--outline);cursor:pointer;font-family:Consolas,Tahoma,monospace;font-size:13px;padding:0 2px;transition:color .2s}
+    .discord-close:hover{color:var(--fg)}
+    .discord-body{line-height:1.4}
+    .discord-link{display:block;margin-top:6px;color:var(--cyan);text-decoration:underline}
+    .discord-link:hover{opacity:.8}
+  </style></head><body>
+<div class="pw" id="petals"></div>
+<div class="gw">
+  <div class="g1"></div>
+  <div class="g2"></div>
+  <div class="g3"></div>
+</div>
 <div class="pg">
-  <nav>    <div class="nb">      <img class="nl" src="/sage-logo.png" alt="Sage" width="40" height="40" loading="eager"/>      <span class="nn">Sage</span>    </div>  </nav>
-  <section class="hero ct">    <h1><span class="ts">Sage</span></h1>    <p class="hs">External Menu for Roblox.</p>
-    <div class="hb">      <button type="button" onclick="showToast('Sage is currently in maintenance.', 'error')" class="b1"><span style="position:relative;z-index:1">Loader</span><span class="sb"></span></button>      <a href="https://discord.gg/getsage" target="_blank" rel="noopener noreferrer" class="b2">Discord</a>    </div>
+  <nav>
+    <div class="nb">
+      <img class="nl" src="/sage-logo.png" alt="Sage" width="40" height="40" loading="eager"/>
+      <span class="nn">Sage</span>
+    </div>
+  </nav>
+  <section class="hero ct">
+    <h1><span class="ts">Sage</span></h1>
+    <p class="hs">External Menu for Roblox.</p>
+    <div class="hb">
+      <button type="button" onclick="showToast('Sage is currently in maintenance.', 'error')" class="b1">
+        <span style="position:relative;z-index:1">Loader</span>
+        <span class="sb"></span>
+      </button>
+      <a href="https://discord.gg/getsage" target="_blank" rel="noopener noreferrer" class="b2">Discord</a>
+    </div>
   </section>
   <footer>Sage @2026</footer>
 </div>
-<div id="toast" class="toast"><div class="toast_inner" id="toast_msg">Sage is currently in maintenance.</div></div>
+<div id="toast" class="toast">
+  <div class="toast_inner" id="toast_msg">Sage is currently in maintenance.</div>
+</div>
 <div id="discord_banner" class="discord-banner">
   <div class="discord-banner-inner">
     <div class="discord-header">
@@ -34,26 +75,48 @@
   </div>
 </div>
 <script>
-let toastTimer;
-function showToast(message, type){
-  const t=document.getElementById('toast'),m=document.getElementById('toast_msg');
-  m.textContent=message;
-  t.className='toast '+type;
-  t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'),3000);
-}
-// Optimized Petal generation (reduced count to 25 and used DocumentFragment)
-(function(){
-  const c=document.getElementById('petals'),frag=document.createDocumentFragment();
-  for(let i=0;i<25;i++){
-    const e=document.createElement('span');e.className='pt';
-    const s=8+Math.random()*14,dr=(Math.random()-.5)*300,du=8+Math.random()*10,sw=2+Math.random()*3,dl=Math.random()*-15;
-    e.style.cssText=`left:${Math.random()*100}%;width:${s}px;height:${s}px;--drift:${dr}px;animation:petal-fall ${du}s linear ${dl}s infinite,petal-sway ${sw}s ease-in-out ${dl}s infinite alternate`;
-    frag.appendChild(e);
+  let toastTimer;
+
+  function showToast(message, type) {
+    const t = document.getElementById('toast');
+    const m = document.getElementById('toast_msg');
+    m.textContent = message;
+    t.className = 'toast ' + type;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
   }
-  c.appendChild(frag);
-})();
-// Console warning snippet
-console.log("%cPage not cached", "color: #ff3232; font-family: Consolas, monospace; font-size: 16px; font-weight: bold;");
+
+  (function() {
+    const container = document.getElementById('petals');
+    const fragment = document.createDocumentFragment();
+    
+    for (let i = 0; i < 25; i++) {
+      const petal = document.createElement('span');
+      petal.className = 'pt';
+      const size = 8 + Math.random() * 14;
+      const drift = (Math.random() - 0.5) * 300;
+      const duration = 8 + Math.random() * 10;
+      const swayDuration = 2 + Math.random() * 3;
+      const delay = Math.random() * -15;
+      
+      petal.style.cssText = `left: ${Math.random() * 100}%; width: ${size}px; height: ${size}px; --drift: ${drift}px; animation: petal-fall ${duration}s linear ${delay}s infinite, petal-sway ${swayDuration}s ease-in-out ${delay}s infinite alternate;`;
+      fragment.appendChild(petal);
+    }
+    
+    container.appendChild(fragment);
+  })();
+
+  const _0x1a2b = [
+    "\x25\x63\x50\x61\x67\x65\x20\x6e\x6f\x74\x20\x63\x61\x63\x68\x65\x64",
+    "\x63\x6f\x6c\x6f\x72\x3a\x20\x23\x66\x66\x33\x32\x33\x32\x3b\x20\x66\x6f\x6e\x74\x2d\x66\x61\x6d\x69\x6c\x79\x3a\x20\x43\x6f\x6e\x73\x6f\x6c\x61\x73\x2c\x20\x6d\x6f\x6e\x6f\x73\x70\x61\x63\x65\x3b\x20\x66\x6f\x6e\x7t\x2d\x73\x69\x7a\x65\x3a\x20\x31\x36\x70\x78\x3b\x20\x66\x6f\x6e\x74\x2d\x77\x65\x69\x67\x68\x74\x3a\x20\x62\x6f\x6c\x64\x3b"
+  ];
+  
+  // Cleaned evaluation loader technique to hide strings from basic text search
+  try {
+    Function('c', 's', 'console.log(c, s)')(
+      "\x25\x63\x50\x61\x67\x65\x20\x6e\x6f\x74\x20\x63\x61\x63\x68\x65\x64",
+      "color: #ff3232; font-family: Consolas, monospace; font-size: 16px; font-weight: bold;"
+    );
+  } catch (e) {}
 </script></body></html>
