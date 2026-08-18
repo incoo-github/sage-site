@@ -111,14 +111,13 @@ input[type=text]:focus{border-color:var(--accent)}
   <div class="tab-body">
 
     <!-- AIMBOT TAB -->
-    <div class="tab-panel active" data-panel="aimbot">
+    <div class="tab-panel active" data-panel="aimbot" style="flex-direction:column;padding:0">
       <div class="sub-tabs" id="aimbotSubTabs">
         <button class="sub-tab active" data-sub="aim-main">Main</button>
         <button class="sub-tab" data-sub="aim-silent">Silent Aim</button>
       </div>
-    </div>
-    <div class="tab-panel" data-panel="aimbot-content" style="padding:0">
-      <div class="sub-panel active" id="aim-main" style="flex:1;padding:10px;gap:10px;overflow-y:auto">
+      <div style="flex:1;overflow:hidden;display:flex;flex-direction:column">
+      <div class="sub-panel active" id="aim-main" style="flex:1;padding:10px;gap:10px;overflow-y:auto;display:flex">
         <div class="col">
           <div class="group">
             <div class="group-header">Aimbot</div>
@@ -191,6 +190,8 @@ input[type=text]:focus{border-color:var(--accent)}
             </div>
           </div>
         </div>
+      </div>
+      </div>
       </div>
     </div>
 
