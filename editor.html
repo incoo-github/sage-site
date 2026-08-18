@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Sage - Config Editor</title>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;border-radius:0!important}
+    :root{--font:#ffffff;--main:#1c1c1c;--bg:#050505;--accent:oklch(0.85 0.12 195);--outline:#323232;--muted:oklch(0.97 0.01 190/40%);--muted2:oklch(0.97 0.01 190/70%);--stroke:-1px 0 0 #000,1px 0 0 #000,0 -1px 0 #000,0 1px 0 #000;--h:20px;--pad:8px;}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--font);font-family:Consolas,Tahoma,monospace;font-size:13px;line-height:1.35;overflow-x:hidden;-webkit-font-smoothing:none}
+    ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent)}
+    .gw{pointer-events:none;position:fixed;inset:0;z-index:-1}
+    .g1{position:absolute;top:-160px;left:-160px;height:500px;width:500px;border-radius:9999px!important;background:oklch(.75 .15 195);opacity:.1;filter:blur(120px);animation:glow 6s ease-in-out infinite}
+    .g2{position:absolute;top:33%;right:-160px;height:600px;width:600px;border-radius:9999px!important;background:oklch(.65 .18 185);opacity:.08;filter:blur(140px);animation:glow 8s ease-in-out infinite 2s}
+    @keyframes glow{0%,100%{opacity:.15;transform:scale(1)}50%{opacity:.3;transform:scale(1.1)}}
+    @keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+    .page{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:2rem 1.5rem}
+    .ct{max-width:1152px;width:100%}
+    nav{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem}
+    nav a{color:var(--muted2);text-decoration:none;text-shadow:var(--stroke);font-size:12px;transition:color .2s}
+    nav a:hover{color:var(--font)}
+    nav .back{color:var(--accent)}
+    h1{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;margin-bottom:1.25rem}
+    .ts{background:linear-gradient(90deg,oklch(.95 .02 190),var(--accent) 50%,oklch(.95 .02 190));background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 4s linear infinite}
+    .row{margin-bottom:10px}
+    label{display:block;font-size:11px;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px;text-shadow:var(--stroke)}
+    input[type=text],textarea{width:100%;background:var(--main);border:1px solid var(--outline);padding:8px 10px;color:var(--font);font-size:12px;font-family:Consolas,Tahoma,monospace;outline:none}
+    input[type=text]:focus,textarea:focus{border-color:var(--accent)}
+    textarea{height:440px;resize:vertical;line-height:1.5}
+    .ui_btn_outer{display:inline-block;background:var(--black);border:1px solid var(--black);cursor:pointer;text-decoration:none;color:var(--font);font-family:inherit;font-size:12px;line-height:0;vertical-align:top;padding:0;margin:0}
+    .ui_btn_outer:hover{border-color:var(--muted)}
+    .ui_btn_inner{display:block;position:relative;min-width:64px;height:28px;line-height:28px;padding:0 12px;background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);text-align:center;white-space:nowrap;user-select:none;text-shadow:var(--stroke);z-index:0;font-size:12px}
+    .ui_btn_inner::before{content:"";position:absolute;inset:1px;background:linear-gradient(180deg,rgba(255,255,255,.07) 0%,rgba(212,212,212,.025) 100%);pointer-events:none}
+    .btns{display:flex;gap:var(--pad);margin-top:12px;flex-wrap:wrap}
+    .status{font-size:11px;color:var(--muted);margin-top:8px;text-shadow:var(--stroke);min-height:16px;transition:color .2s}
+    .status.ok{color:oklch(0.7 0.18 145)}
+    .status.err{color:#ff3232}
+    footer{border-top:1px solid var(--outline);padding:1.5rem;text-align:center;font-size:.875rem;color:var(--muted);width:100%;margin-top:auto}
+    .frame_accent{height:1px;background:var(--accent);flex-shrink:0;line-height:0;margin-top:2rem}
+    .toast{position:fixed;bottom:16px;left:16px;z-index:999;max-width:360px;background:var(--black);border:1px solid var(--black);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;pointer-events:none;line-height:normal}
+    .toast.show{opacity:1;transform:none}
+    .toast_inner{background:var(--main);box-shadow:inset 0 0 0 1px var(--outline);padding:6px 10px 6px 14px;position:relative;font-size:12px;text-shadow:var(--stroke)}
+    .toast_inner::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
+    .toast.error .toast_inner::before{background:#ff3232}
+  </style>
+</head>
+<body>
+<div class="gw"><div class="g1"></div><div class="g2"></div></div>
+<div class="page">
+  <div class="ct">
+    <nav>
+      <a href="/" class="back">&larr; sage</a>
+      <a href="https://discord.gg/getsage" target="_blank">discord</a>
+    </nav>
+    <h1><span class="ts">config</span> editor</h1>
+    <div class="row">
+      <label>HWID</label>
+      <input type="text" id="hwid" placeholder="paste your hwid (from sage settings)">
+    </div>
+    <div class="row">
+      <label>config (json)</label>
+      <textarea id="config" spellcheck="false">{
+  "version": 1,
+  "name": "default",
+  "aimbot": { "enabled": false },
+  "silentaim": { "enabled": false, "fov": 100, "target_part": 0 },
+  "esp": { "enabled": false, "box": false, "name": false, "health": false },
+  "movement": { "enabled": false },
+  "rendering": { "streamproof": false, "menu_key": 45, "watermark": true },
+  "theme": { "accent": [0.0, 0.71, 0.86, 1.0] },
+  "web_config": { "enabled": false, "url": "" }
+}</textarea>
+    </div>
+    <div class="btns">
+      <button class="ui_btn_outer" onclick="loadConfig()"><span class="ui_btn_inner">load from server</span></button>
+      <button class="ui_btn_outer" onclick="saveConfig()"><span class="ui_btn_inner">save to server</span></button>
+      <button class="ui_btn_outer" onclick="exportFile()"><span class="ui_btn_inner">download file</span></button>
+      <button class="ui_btn_outer" onclick="importFile()"><span class="ui_btn_inner">upload file</span></button>
+    </div>
+    <div class="status" id="status"></div>
+    <div class="frame_accent"></div>
+  </div>
+  <footer>Sage @2026</footer>
+</div>
+<div id="toast" class="toast"><div class="toast_inner" id="toast_msg"></div></div>
+<input type="file" id="fileInput" accept=".json" style="display:none">
+<script>
+const API = '/api/config';
+const $ = id => document.getElementById(id);
+let toastTimer;
+function showToast(msg, err) {
+  const t = $('toast'), m = $('toast_msg');
+  m.textContent = msg;
+  t.className = 'toast ' + (err ? 'error' : '');
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+async function loadConfig() {
+  const hwid = $('hwid').value.trim();
+  if (!hwid) return show('enter your hwid', true);
+  show('loading...');
+  try {
+    const r = await fetch(`${API}?hwid=${encodeURIComponent(hwid)}`);
+    const data = await r.json();
+    if (data.error) return show(data.error, true);
+    if (Object.keys(data).length === 0) return show('no config found for this hwid', true);
+    delete data._updated;
+    $('config').value = JSON.stringify(data, null, 2);
+    show('loaded', false, true);
+    showToast('config loaded from server');
+  } catch(e) { show('request failed', true); }
+}
+async function saveConfig() {
+  const hwid = $('hwid').value.trim();
+  if (!hwid) return show('enter your hwid', true);
+  let data;
+  try { data = JSON.parse($('config').value); }
+  catch(e) { return show('invalid json', true); }
+  show('saving...');
+  try {
+    const r = await fetch(`${API}?hwid=${encodeURIComponent(hwid)}`, {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    });
+    const res = await r.json();
+    if (res.error) return show(res.error, true);
+    show('saved', false, true);
+    showToast('config saved to server');
+  } catch(e) { show('request failed', true); }
+}
+function exportFile() {
+  let data;
+  try { data = JSON.parse($('config').value); }
+  catch(e) { return show('invalid json', true); }
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'sage_config.json';
+  a.click();
+  showToast('file downloaded');
+}
+function importFile() { $('fileInput').click(); }
+$('fileInput').onchange = e => {
+  const f = e.target.files[0]; if (!f) return;
+  const reader = new FileReader();
+  reader.onload = () => { $('config').value = reader.result; show('imported', false, true); showToast('file imported'); };
+  reader.readAsText(f);
+};
+function show(msg, err, ok) {
+  const s = $('status');
+  s.textContent = msg;
+  s.className = 'status' + (err ? ' err' : ok ? ' ok' : '');
+  if (!err && !ok) setTimeout(() => { s.textContent = ''; s.className = 'status'; }, 2500);
+}
+</script>
+</body>
+</html>
