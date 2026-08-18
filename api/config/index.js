@@ -1,6 +1,8 @@
-import { kv } from "@vercel/kv";
-
 export default async function handler(req, res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
@@ -11,19 +13,17 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "invalid hwid" });
   }
 
-  const key = config: + hwid;
+  const key = "config:" + hwid;
 
-  if (req.method === "GET") {
-    try {
+  try {
+    const { kv } = await import("@vercel/kv");
+
+    if (req.method === "GET") {
       const config = await kv.get(key);
       return res.status(200).json(config || {});
-    } catch {
-      return res.status(500).json({ error: "kv read failed" });
     }
-  }
 
-  if (req.method === "POST") {
-    try {
+    if (req.method === "POST") {
       const config = req.body;
       if (!config || typeof config !== "object") {
         return res.status(400).json({ error: "invalid config body" });
@@ -31,9 +31,9 @@ export default async function handler(req, res) {
       config._updated = Date.now();
       await kv.set(key, config);
       return res.status(200).json({ ok: true });
-    } catch {
-      return res.status(500).json({ error: "kv write failed" });
     }
+  } catch (err) {
+    return res.status(500).json({ error: "server error: " + (err.message || "unknown") });
   }
 
   return res.status(405).json({ error: "method not allowed" });
