@@ -1,16 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/editor", "destination": "/editor.html" },
-    { "source": "/menu", "destination": "/menu.html" },
-    { "source": "/key", "destination": "/key.html" }
-  ],
   "headers": [
     {
-      "source": "/api/(.*)",
+      "source": "/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin", "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, DELETE, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, X-Admin-Key" }
+        { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
     }
   ]
