@@ -35,7 +35,11 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "POST") {
-      const { username, plan, duration_days } = req.body || {};
+      let body = req.body;
+      if (typeof body === "string") {
+        try { body = JSON.parse(body); } catch { body = {}; }
+      }
+      const { username, plan, duration_days } = body || {};
 
       const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
       let key = "";
@@ -61,7 +65,11 @@ export default async function handler(req, res) {
     }
 
     if (req.method === "DELETE") {
-      const { key } = req.body || {};
+      let body = req.body;
+      if (typeof body === "string") {
+        try { body = JSON.parse(body); } catch { body = {}; }
+      }
+      const { key } = body || {};
       if (!key) return res.status(400).json({ error: "key required" });
 
       const existing = await kv.get("key:" + key);
